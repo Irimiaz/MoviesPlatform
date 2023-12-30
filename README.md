@@ -1,14 +1,93 @@
-# MoviesPlatform
+# POO TV Streaming Platform
 
-The idea of this project is to simulate an interface of a site such as Netflix through which the user can interact with different movies and also be able to log in or authenticate. My main class is the one called PLATFORM which is instantiated using Singleton. In this class there are details and general information about the entire platform (such as all the movies that are available, the current user or the current page where the user is).
+## Project Overview
 
-In the "platform" package, there are also classes such as User or Movie, which have the role of storing information about users or movies. Input and output classes are very important because it provide and display the information in the form of Json and facilitate data processing, putting that data into classes. 
+This project involves implementing a simple backend for a specific movie and series streaming platform, akin to services like Netflix or HBO MAX. The primary objectives are to develop a generic backend for a streaming platform, enhance organizational and object-oriented design skills, write generic code for easy addition of new functionalities, utilize appropriate design patterns for various tasks, and adhere to a standard coding and commenting style.
 
-In the "actions" package there are several classes such as "Filter" "Change Page" "Purchase" "Login" which simply represent the action desired by the user. Within these classes there is the logic behind the entire project. Action information is stored in classes to make the code better structured.
+## Stage 1 - Implementation
 
-The Main class is the one that goes through all the actions and uses the input to send further commands. It will go through each action separately and call the functions from the "actions" package. Depending on the result of these calls, different outputs (error or desired display) will be sent to the user.
+### Structure Overview
 
-Database add and delete are two functions that add or delete movies from the database. In addition to modifying the database, all affected users will receive a notification. We implemented these functions using the Observer Design Pattern because once the Database is modified, several actions are produced simultaneously. All the observers we need are instantiated and they are all updated instantly.
+The platform operates on a sequential system, and actions are executed sequentially based on received commands. The platform's structure resembles a file system, with pages representing different levels of interaction.
 
-The back action between pages is exactly the opposite of the change page, because users also need to return to a previous page. In order not to have to remember for each change page and the page we started from, we used the Command design pattern which has the role of remembering the list of commands performed on an object. This design pattern is perfect for creating delegation and callback structures. 
+#### User Pages
 
+1. **Homepage Unauthenticated**: Initial landing page for users not logged in.
+   - Options: Register, Login.
+
+2. **Register Page**: Allows users to register a new account.
+   - Action: Register.
+
+3. **Login Page**: Facilitates user login.
+   - Action: Login.
+
+4. **Homepage Authenticated**: After successful login, users have access to:
+   - Logout
+   - Movies
+   - See Details
+   - Upgrades
+
+5. **Movies Page**: Lists available movies based on the user's country.
+   - Actions: See Details, Upgrades, Search, Filter.
+
+6. **See Details Page**: Provides details about a specific movie.
+   - Actions: Purchase, Watch, Like, Rate the movie.
+
+7. **Upgrades Page**: Offers premium account and token purchase options.
+   - Actions: Buy Tokens, Buy Premium Account.
+
+#### Workflow Example
+
+1. Start at "Homepage Unauthenticated."
+2. Navigate to "Register" or "Login."
+3. After successful login, move to "Homepage Authenticated."
+4. Explore options like "Movies," "See Details," and "Upgrades."
+5. Execute actions such as "Purchase," "Watch," "Like," and "Rate the movie."
+
+### Execution of the Project
+
+1. Load initial data from the JSON file containing user information and the movie list.
+2. Receive sequential actions and execute them, updating the platform's state.
+3. Display the result in the output JSON file after each action.
+
+### User Actions
+
+- **Change Page**: Navigate to a different page.
+- **On Page Actions**: Execute specific actions on the current page.
+
+## Stage 2 Enhancements
+
+### Subscribe Feature
+- Allow users to subscribe to film genres.
+- Subscription notifications on new relevant movies.
+
+### Database Modification
+#### Add Movie
+- Add a movie to the database.
+- Notify genre subscribers.
+
+#### Delete Movie
+- Delete a movie; refund and notify buyers.
+
+### Back Action
+- Navigate back for logged-in users.
+
+### Premium User Recommendations
+- Provide personalized film recommendations.
+- Follow a specified algorithm.
+
+### Output Modification
+- Display user notifications.
+
+## Notes
+- Maintain subscriptions between sessions.
+- Handle errors for various actions.
+- Implement a user-friendly Back action.
+
+## Recommendations
+- Generate a concise readme for GitHub.
+- Ensure correct input/output format.
+- Adhere to defined action constraints.
+
+## Example Input/Output
+- Refer to documentation examples.
